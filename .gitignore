@@ -1,0 +1,13 @@
+# Terraform cache (no subir)
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+*.tfplan
+
+# Node modules (si los hay)
+node_modules/
+
+# Build local (si los hay)
+dist/
+build/
