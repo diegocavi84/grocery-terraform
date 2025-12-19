@@ -3,17 +3,8 @@
 Dashboard de CPU simulada con AWS Lambda, CloudWatch y S3, desplegado con Terraform.
 
 ## 🗺️ Arquitectura
+<img width="604" height="128" alt="image" src="https://github.com/user-attachments/assets/d1849d1f-ffa7-4f53-9318-dc7294538007" />
 
-```mermaid
-flowchart LR
-    User([User]) --&gt; S3[S3 Static Website]
-    User --&gt; Dashboard[CloudWatch Dashboard]
-    EventBridge[EventBridge 1 min] --&gt; Lambda[Lambda Health]
-    Lambda --&gt; CloudWatch[CloudWatch Metrics]
-    Terraform[Terraform CLI] --&gt; S3
-    Terraform --&gt; Lambda
-    Terraform --&gt; EventBridge
-    Terraform --&gt; CloudWatch
 
 🛠️ Arquitectura
 AWS Lambda: Función que envía métricas de CPU a CloudWatch.
