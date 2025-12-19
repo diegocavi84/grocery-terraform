@@ -15,17 +15,7 @@ resource "aws_s3_bucket_website_configuration" "web" {
     suffix = "index.html"
   }
 }
-# Redirigir 404 → index.html (SPA mode)
-resource "aws_s3_bucket_website_configuration" "web_redirect" {
-  bucket = aws_s3_bucket.web.id
 
-  index_document {
-    suffix = "index.html"
-  }
-  error_document {
-    key = "index.html"
-  }
-}
 # IMPORTANTE: Primero quitar bloqueo de acceso público
 resource "aws_s3_bucket_public_access_block" "web_pab" {
   bucket = aws_s3_bucket.web.id
