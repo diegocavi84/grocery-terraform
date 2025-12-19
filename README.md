@@ -1,91 +1,55 @@
-# Grocery Store – Terraform Infrastructure
+# Dashboard CPU – Terraform Infrastructure
 
-Serverless grocery store deployed with **Terraform**, featuring **S3 static hosting**, **Lambda health-check**, and **CloudWatch dashboard**.
+Dashboard de CPU simulada con AWS Lambda, CloudWatch y S3, desplegado con Terraform.
 
-## 🏪 Live Demo
-- **Tienda online**: [http://grocery-cloud-123-456.s3-website-us-east-1.amazonaws.com](http://grocery-cloud-123-456.s3-website-us-east-1.amazonaws.com)
-- **Dashboard**: [https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Grocery-Health](https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Grocery-Health)
+## 🗺️ Arquitectura
 
-## 🏗️ Architecture
+```mermaid
+flowchart LR
+    User([User]) --&gt; S3[S3 Static Website]
+    User --&gt; Dashboard[CloudWatch Dashboard]
+    EventBridge[EventBridge 1 min] --&gt; Lambda[Lambda Health]
+    Lambda --&gt; CloudWatch[CloudWatch Metrics]
+    Terraform[Terraform CLI] --&gt; S3
+    Terraform --&gt; Lambda
+    Terraform --&gt; EventBridge
+    Terraform --&gt; CloudWatch
 
-<img width="604" height="128" alt="image" src="https://github.com/user-attachments/assets/43d244ef-a03b-4eca-ab36-0189016e9da9" />
+🛠️ Arquitectura
+AWS Lambda: Función que envía métricas de CPU a CloudWatch.
+Amazon CloudWatch: Dashboard público con gráficas de CPU.
+Amazon S3: Hosting estático de la página web.
+Amazon EventBridge: Trigger cada 1 minuto.
+Terraform: Infraestructura como código.
+🚀 Deployment Instructions
+Prerequisites
+Terraform ≥ 1.14
+AWS cuenta con credenciales configuradas.
+Deployment Steps
 
-
-
-🧱 Stack
-Table
-Copy
-Servicio	Uso
-Terraform	Infraestructura como código
-S3	Hosting estático del frontend (React build)
-Lambda	Health-check que envía métricas de CPU
-EventBridge	Trigger cada 1 minuto
-CloudWatch	Dashboard público con gráficas
-💰 Costo
-≈ 0,03 USD/mes dentro del AWS Free Tier.
-
-🚀 Quick Start
-Clona el repo:
+Inicializar Terraform:
 bash
 Copy
-git clone https://github.com/diegocavi84/grocery-terraform.git
-cd grocery-terraform
-Configura credenciales AWS:
-bash
-Copy
-aws configure
-# Access Key, Secret, Region: us-east-1
-Despliega la infraestructura:
-bash
-Copy
-cd terraform
 terraform init
 terraform apply
-Sube el build de React:
+Subir la página web:
 bash
 Copy
-aws s3 cp ../src/frontend/build/ s3://$(terraform output -raw bucket_name)/ --recursive
-Abre la tienda:
-http://grocery-cloud-123-456.s3-website-us-east-1.amazonaws.com
-📁 Project Structure
+aws s3 cp src/ s3://$(terraform output -raw bucket_name)/ --recursive
+
+bash
 Copy
-grocery-terraform/
-├── terraform/          # Infra como código
-│   ├── main.tf
-│   └── outputs.tf
-├── lambda/             # Código Python
-│   └── health/health.py
-├── src/                # Frontend React (build)
-│   └── frontend/build/
-├── docs/               # Capturas de pantalla
-└── README.md           # Este archivo
-📸 Screenshots
-Table
-Copy
-Vista	Enlace
-Tienda online	Ver tienda
-Dashboard CPU	Ver dashboard
+aws s3 cp src/ s3://$(terraform output -raw bucket_name)/ --recursive
+
+🗺️ Demo
+Tienda online: http://grocery-cloud-123-456.s3-website-us-east-1.amazonaws.com
+Dashboard: [https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Grocery-Health](https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Grocery-Health]
 🛠️ Tecnologías
-Terraform ≥ 1.5
 Python 3.12
-React (build estático)
-AWS (S3, Lambda, EventBridge, CloudWatch)
+Terraform ≥ 1.14
+AWS (S3, Lambda, CloudWatch, EventBridge)
+📸 Capturas de Pantalla
+Dashboard: Ver dashboard
+Tienda online: Ver tienda
 📄 Licencia
 MIT © Diego Castillo
-Copy
-
----
-
-### ✅ PASO 3 – Guardar y cerrar nano
-
-- **Ctrl + O** → **Enter** (guarda)
-- **Ctrl + X** (cierra)
-
----
-
-### ✅ PASO 4 – Subir a GitHub
-
-```bash
-git add README.md
-git commit -m "Add professional README with architecture diagram"
-git push origin master
