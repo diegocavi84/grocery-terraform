@@ -8,8 +8,8 @@ Serverless grocery store deployed with **Terraform**, featuring **S3 static host
 
 ## 🏗️ Architecture
 
-flowchart LR
-User([User]) --> S3[S3 Static Website]
+<img width="604" height="128" alt="image" src="https://github.com/user-attachments/assets/43d244ef-a03b-4eca-ab36-0189016e9da9" />
+
 
 
 🧱 Stack
