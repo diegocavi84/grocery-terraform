@@ -8,16 +8,9 @@ Serverless grocery store deployed with **Terraform**, featuring **S3 static host
 
 ## 🏗️ Architecture
 
-```mermaid
 flowchart LR
-    User([User]) --&gt; S3[S3 Static Website]
-    User --&gt; Dashboard[CloudWatch Dashboard]
-    EventBridge[EventBridge 1 min] --&gt; Lambda[Lambda Health]
-    Lambda --&gt; CloudWatch[CloudWatch Metrics]
-    Terraform[Terraform CLI] --&gt; S3
-    Terraform --&gt; Lambda
-    Terraform --&gt; EventBridge
-    Terraform --&gt; CloudWatch
+User([User]) --> S3[S3 Static Website]
+
 
 🧱 Stack
 Table
