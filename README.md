@@ -41,6 +41,6 @@ Terraform ≥ 1.14
 AWS (S3, Lambda, CloudWatch, EventBridge)
 📸 Capturas de Pantalla
 Dashboard: Ver dashboard
-Tienda online: Ver tienda
+Tienda online: ![Web](/Users/diegocastillo/Documents/screenshots/web.png)
 📄 Licencia
 MIT © Diego Castillo
