@@ -1,46 +1,55 @@
-# Dashboard CPU – Terraform Infrastructure
+# 📊 CPU Monitoring Dashboard – AWS & Terraform
 
-Dashboard de CPU simulada con AWS Lambda, CloudWatch y S3, desplegado con Terraform.
+This project demonstrates an **Infrastructure as Code (IaC)** implementation that deploys a **simulated CPU monitoring dashboard** using **AWS serverless services**, fully automated with **Terraform**.
 
-## 🗺️ Arquitectura
-<img width="604" height="128" alt="image" src="https://github.com/user-attachments/assets/d1849d1f-ffa7-4f53-9318-dc7294538007" />
+---
 
+## 🧠 Project Overview
 
-🛠️ Arquitectura
-AWS Lambda: Función que envía métricas de CPU a CloudWatch.
-Amazon CloudWatch: Dashboard público con gráficas de CPU.
-Amazon S3: Hosting estático de la página web.
-Amazon EventBridge: Trigger cada 1 minuto.
-Terraform: Infraestructura como código.
-🚀 Deployment Instructions
-Prerequisites
-Terraform ≥ 1.14
-AWS cuenta con credenciales configuradas.
-Deployment Steps
+The system periodically generates simulated CPU usage metrics using an **AWS Lambda** function and publishes them to **Amazon CloudWatch**.  
+These metrics are visualized in a **CloudWatch dashboard**, while a **static web page** is hosted on **Amazon S3**.
 
-Inicializar Terraform:
-bash
-Copy
+This project is designed for **learning and demonstration purposes**, focusing on cloud monitoring, serverless architecture, and Terraform-based deployments.
+
+---
+
+## 🗺️ Architecture
+
+![Architecture Diagram](architecture.png)
+
+### Components
+
+- **AWS Lambda**  
+  Generates and publishes simulated CPU metrics.
+
+- **Amazon EventBridge**  
+  Triggers the Lambda function every 1 minute.
+
+- **Amazon CloudWatch**  
+  Stores metrics and displays them in a dashboard.
+
+- **Amazon S3**  
+  Hosts a static website.
+
+- **Terraform**  
+  Manages all AWS resources as Infrastructure as Code.
+
+---
+
+## 🚀 Deployment Instructions
+
+### ✅ Prerequisites
+
+- Terraform **>= 1.14**
+- AWS account with configured credentials
+- AWS CLI installed
+- Python **3.12**
+
+---
+
+### 📦 Infrastructure Deployment
+
+```bash
 terraform init
 terraform apply
-Subir la página web:
-bash
-Copy
-aws s3 cp src/ s3://$(terraform output -raw bucket_name)/ --recursive
 
-bash
-Copy
-aws s3 cp src/ s3://$(terraform output -raw bucket_name)/ --recursive
-
-🗺️ Demo
-Tienda online: http://grocery-cloud-123-456.s3-website-us-east-1.amazonaws.com
-Dashboard: [https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Grocery-Health](https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Grocery-Health]
-🛠️ Tecnologías
-Python 3.12
-Terraform ≥ 1.14
-AWS (S3, Lambda, CloudWatch, EventBridge)
-📸 Capturas de Pantalla
-Dashboard: Ver dashboard
-Tienda online: ![Web](/Users/diegocastillo/Documents/screenshots/web.png)
-📄 Licencia
-MIT © Diego Castillo
